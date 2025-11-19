@@ -1,0 +1,26 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiwi-app
+  namespace: default
+  labels:
+    app: kiwi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kiwi
+  template:
+    metadata:
+      labels:
+        app: kiwi
+    spec:
+      containers:
+        - name: kiwi
+          image: hashicorp/http-echo:0.2.3
+          args:
+            - "-text=this is the kiw app"
+          ports:
+            - containerPort: 5678
